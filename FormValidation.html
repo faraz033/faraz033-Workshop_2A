@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .form-container {
+            background-color: white;
+            width: 400px;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-top: 12px;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        input.invalid,
+        select.invalid {
+            border-color: #dc3545;
+        }
+
+        .error-message {
+            color: #dc3545;
+            font-size: 12px;
+            margin-top: 4px;
+            min-height: 14px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .success-message {
+            display: none;
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 15px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="form-container">
+
+        <h2>Registration Form</h2>
+
+        <form id="registrationForm" novalidate>
+
+            <label for="name">Full Name</label>
+            <input 
+                type="text" 
+                id="name" 
+                name="name"
+                placeholder="Enter your name"
+                required
+                minlength="3"
+            >
+            <div class="error-message" id="nameError"></div>
+
+            <label for="email">Email</label>
+            <input 
+                type="email" 
+                id="email" 
+                name="email"
+                placeholder="Enter your email"
+                required
+            >
+            <div class="error-message" id="emailError"></div>
+
+            <label for="phone">Phone Number</label>
+            <input 
+                type="tel" 
+                id="phone" 
+                name="phone"
+                placeholder="Enter 10-digit phone number"
+                pattern="[0-9]{10}"
+                required
+            >
+            <div class="error-message" id="phoneError"></div>
+
+            <label for="password">Password</label>
+            <input 
+                type="password" 
+                id="password" 
+                name="password"
+                placeholder="Enter password"
+                minlength="6"
+                required
+            >
+            <div class="error-message" id="passwordError"></div>
+
+            <label for="age">Age</label>
+            <input 
+                type="number" 
+                id="age" 
+                name="age"
+                min="18"
+                max="60"
+                required
+            >
+            <div class="error-message" id="ageError"></div>
+
+            <label for="gender">Gender</label>
+            <select id="gender" name="gender" required>
+                <option value="">Select Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+            <div class="error-message" id="genderError"></div>
+
+            <button type="submit">Register</button>
+
+            <div class="success-message" id="successMessage">
+                Registration successful!
+            </div>
+
+        </form>
+
+    </div>
+
+    <script>
+        var form = document.getElementById('registrationForm');
+        var successMessage = document.getElementById('successMessage');
+
+        var nameInput = document.getElementById('name');
+        var emailInput = document.getElementById('email');
+        var phoneInput = document.getElementById('phone');
+        var passwordInput = document.getElementById('password');
+        var ageInput = document.getElementById('age');
+        var genderInput = document.getElementById('gender');
+
+        form.addEventListener('submit', function (e) {
+            e.preventDefault(); 
+
+            var name = nameInput.value;
+            var email = emailInput.value;
+            var phone = phoneInput.value;
+            var password = passwordInput.value;
+            var age = ageInput.value;
+            var gender = genderInput.value;
+
+            if (name.length < 3) {
+                alert('Name must be at least 3 characters.');
+                return;
+            }
+
+            if (email.indexOf('@') === -1 || email.indexOf('.') === -1) {
+                alert('Please enter a valid email address.');
+                return;
+            }
+
+            if (phone.length !== 10 || isNaN(phone)) {
+                alert('Phone number must be exactly 10 digits.');
+                return;
+            }
+
+            if (password.length < 6) {
+                alert('Password must be at least 6 characters.');
+                return;
+            }
+
+            if (age < 18 || age > 60) {
+                alert('Age must be between 18 and 60.');
+                return;
+            }
+
+            if (gender === '') {
+                alert('Please select a gender.');
+                return;
+            }
+
+            successMessage.style.display = 'block';
+            form.reset();
+        });
+    </script>
+
+</body>
+</html>
