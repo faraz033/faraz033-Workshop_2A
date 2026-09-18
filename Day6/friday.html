@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function sum(...nums) {
+        let total = 0;
+
+        for (let i in nums) {
+          total += Number(num);
+        }
+
+        console.log("Sum =", total);
+      }
+
+      let input = prompt("Enter numbers");
+
+      let numbers = input.split(" ");
+
+      sum(...numbers);
+    </script>
+  </body>
+</html>
